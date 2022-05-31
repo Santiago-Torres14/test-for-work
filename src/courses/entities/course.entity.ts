@@ -18,10 +18,10 @@ export class Course {
   @Column('varchar', { length: 255 })
   name: string;
 
-  @ManyToMany(() => Professor, (professor) => professor.courses, { onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  @ManyToMany(() => Professor, (professor) => professor.courses, { onDelete: 'CASCADE', cascade: true})
   @JoinTable({
     name: 'course_professor',
-    joinColumn: { name: 'course_id', referencedColumnName: 'id' },
+    joinColumn: { name: 'course_id', referencedColumnName: 'id'},
     inverseJoinColumn: {
       name: 'professor_id',
       referencedColumnName: 'id',
@@ -30,8 +30,8 @@ export class Course {
   professors: Professor[];
 
   @OneToMany(() => Student, (student) => student.course, {
-    onDelete: 'CASCADE',
-    cascade: true
+    onDelete: 'SET NULL',
+    nullable: true
   })
-  students: Student[];
+  students?: Student[];
 }

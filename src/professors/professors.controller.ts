@@ -3,6 +3,7 @@ import { ProfessorsService } from './professors.service';
 import { CreateProfessorDto } from './dto/create-professor.dto';
 import { UpdateProfessorDto } from './dto/update-professor.dto';
 import { Professor } from './entities/professor.entity';
+import { createProfessorCourseDto } from './dto/create-professor-course.dto';
 
 @Controller('professors')
 export class ProfessorsController {
@@ -24,7 +25,7 @@ export class ProfessorsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfessorDto: UpdateProfessorDto) {
+  update(@Param('id') id: string, @Body() updateProfessorDto: createProfessorCourseDto) {
     return this.professorsService.update(+id, updateProfessorDto);
   }
 
@@ -32,4 +33,5 @@ export class ProfessorsController {
   async remove(@Param('id') id: string): Promise<Professor[]> {
     return this.professorsService.remove(+id);
   }
+
 }

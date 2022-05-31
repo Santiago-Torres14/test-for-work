@@ -21,6 +21,6 @@ export class Professor{
     })
     area: Area;
 
-    @ManyToMany(() => Course, (course) => course.professors)
+    @ManyToMany(() => Course, (course) => course.professors, { eager: true})
     courses: Course[];
 }

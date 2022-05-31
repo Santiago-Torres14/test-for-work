@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CoursesService } from './courses.service';
+import { CreateCourseProfessorDto } from './dto/create-course-professor.dto';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
@@ -23,13 +24,18 @@ export class CoursesController {
     return await this.coursesService.getCoursesWProfessors();
   }
 
+  @Get('get/:id')
+  async getCourseWProfessor(@Param('id') id: string): Promise<Course> {
+    return await this.coursesService.getCourseWProfessor(+id);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Course> {
     return this.coursesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
+  update(@Param('id') id: string, @Body() updateCourseDto: CreateCourseProfessorDto) {
     return this.coursesService.update(+id, updateCourseDto);
   }
 

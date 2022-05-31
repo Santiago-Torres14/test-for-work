@@ -9,7 +9,7 @@ export class Student{
     @Column("varchar", {length: 255})
     name: string;
 
-    @ManyToOne(() => Course, (course) => course.students, {eager: true})
+    @ManyToOne(() => Course, (course) => course.students, {eager: true, onDelete: "SET NULL", nullable: true})
     @JoinColumn({name: "course_id"})
-    course: Course;
+    course?: Course;
 }
